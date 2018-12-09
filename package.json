@@ -1,0 +1,14 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "Final project for Databases",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Matthew Barta",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
