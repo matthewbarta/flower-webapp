@@ -1,3 +1,3 @@
-var express = require('./server/express.js');
-express.init();
+var server = require('./server/express.js');
+server.init();
 

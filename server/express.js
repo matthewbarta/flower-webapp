@@ -5,7 +5,10 @@ const port = 8080;
 
 module.exports.init = function() {
 
-app.get('/', (req, res) => res.send('Hello World!'));
+// viewed at http://localhost:8080
+app.get('/', function(req, res) {
+    res.sendFile(path.join('/Users/matthewbarta/Desktop/final/client/index.html'));
+});
 
 app.post('/', function (req, res) {
     res.send('Got a POST request')
