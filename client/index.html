@@ -6,12 +6,12 @@
     <meta charset='utf-8' />
     <title>SSWC Flowers</title>
 </head>
-<body>
+<body ng-app="flowerApp" ng-controller="ListingsController">
     <div class="container">
     <nav class="navbar navbar-light bg-light collapse navbar-collapse"id="navbarSupportedContent">
       <div class="container-fluid">
         <a class="navbar-brand" id="logoTitlePackage" href="index.html">
-          <img id="navLogo" src="img/nullclasslogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          <img id="navLogo" src="img/flowerlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           <h5 id="navTitle">Southern Sierra Wildflower Club</h5>
         </a>
         <div id="in_div">
@@ -28,17 +28,37 @@
         </div>
       </div>
     </nav>
-    <div class="col-md-4 flowers">
-
+    <div class="col-md-4">
+      <img id="flower-image" src=""/>
+      <div id="flower-info">
+        </div>
     </div>
-    <div class="col-md-4" id="list">
+    <div class="col-md-4" id="listBar">
+        <div class="btn-group" style="width:100%">
+      <div ng-repeat="flower in listings">
+          <button id={{flower.name}} style="width:90%" class="flowerButton" ng-click="loadFlowerInfo(flower)">{{flower.name}}</button>
+        </div>
+        </div>
     </div>     
     </div>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
+<!-- AngularJS -->
+<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+
+<!-- Access to Angular App -->>
+<script src="js/app.js"></script>
+
+<!-- Firebase API & AngularFire API-->
+<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+<!-- Listing Factory & Controller-->
+<script src="js/factories/listingFactory.js"></script>
+<script src="js/controllers/listingController.js"></script>
+
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-<script src="insertDB.js"></script>
 </body>
 </html>

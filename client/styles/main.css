@@ -3,7 +3,7 @@
 }
 
 body {
-	height: 980px;
+	height: 960px;
 }
 
 #header {
@@ -56,14 +56,40 @@ body {
 	margin-bottom: 25px;
 }
 
-.flowers {
-	margin-left: 140px;
-	height: 320px;
+#flower-image {
+	width: 480px;
+	margin-left: 100px;
+	height: 400px;
 	border: black 2px solid;
+	margin-right: 40px;
+	display: block;
+	margin-bottom: 30px;
 }
 
-#list {
-	margin-left: 140px;
-	height: 980px;
-	border: black 2px solid;	
+#flower-info {
+	width: 480px;
+	display: block;
+	margin-left: 100px;
+	height: 400px;
+	border: black 2px solid;
+	margin-right: 40px;
+
+}
+
+#listBar {
+	margin-left: 300px;
+	height: 830px;
+	overflow: auto;
+	padding: 0px;
+	padding-right: 0px;
+}
+
+.flowerButton {
+	width: 100%;
+	height: 3em;
+	font-weight: bolder;
+	display: inline-block;
+	background-color:  lightgreen;
+	border: black 1px solid;
+	color: black;
 }

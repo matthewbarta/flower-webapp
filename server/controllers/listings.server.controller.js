@@ -70,16 +70,10 @@ exports.delete = function(req, res) {
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
 
-  // Listing.find({}).sort('code').exec((err, listings) => {
-  //   if(err) {
-  //     console.log(err);
-  //     res.status(404).send(err);
-  //   }
-  //   res.status(200).json(listings);
-  // });
   db.serialize(() => {
     db.all(`SELECT COMNAME as name, GENUS as genus, SPECIES as species
-             FROM FLOWERS`, (err, rows) => {
+             FROM FLOWERS
+             ORDER BY NAME`, (err, rows) => {
       if (err) {
         console.error(err.message);
         res.status(404).send(err);
@@ -92,10 +86,6 @@ exports.list = function(req, res) {
 
 /* 
   Middleware: find a listing by its ID, then pass it to the next request handler. 
-
-  Find the listing using a mongoose query, 
-        bind it to the request object as the property 'listing', 
-        then finally call next
  */
 exports.listingByName = function(req, res, next, name) {
   // Listing.findById(id).exec(function(err, listing) {
@@ -106,5 +96,20 @@ exports.listingByName = function(req, res, next, name) {
   //     next();
   //   }
   // });
+
+  db.serialize(() => {
+    db.get(`SELECT COMNAME as name, GENUS as genus, SPECIES as species
+             FROM FLOWERS
+             WHERE COMNAME = (name)`, [name], (err, row) => {
+      if (err) {
+        console.error(err.message);
+        res.status(400).send(err);
+      }
+      else {
+        req.listing = row;
+        next();
+      }
+    });
+  });
   
 };
