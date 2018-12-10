@@ -79,20 +79,6 @@ exports.list = function (req, res) {
           res.status(404).send(err);
         }
         else {
-          rows.forEach((row) => {
-            var name = row.name;
-            db.all(`SELECT PERSON as person, SIGHTED as sighted, LOCATION as location
-            FROM FLOWERS, SIGHTINGS
-            WHERE COMNAME = NAME And NAME = ?
-            Order By SIGHTED DESC LIMIT 10`, [name], (err, sightings) => {
-                if (err) {
-                  console.error(err.message);
-                  res.status(404);
-                }
-                  row.sightings = sightings;
-              });
-          });
-          console.log(rows);
           res.status(200).json(rows);
         }
       });
