@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <meta charset='utf-8' />
+  <title>Null Class</title>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light collapse navbar-collapse"id="navbarSupportedContent">
+      <div class="container-fluid">
+        <a class="navbar-brand" id="logoTitlePackage" href="index.html">
+          <img id="navLogo" src="img/nullclasslogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          <h5 id="navTitle">Null Class</h5>
+        </a>
+        <div id="in_div">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="signup.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          </ul>
+        </div>
+        <div id="out_div">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="user_id"></a></li>
+            <li><a href="signup.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+      <h1 class="display-4"><img id="navLogoSignIn" src="img/nullclasslogo.png" class="d-inline-block align-top" alt="">
+Hello, world!</h1>
+
+      <p class="lead">Welcome to Null Class - a study spot application made by students for students</p>
+      <hr class="my-2">
+      <p>Sign up below or login if you already have an account</p>
+      <div class="col-md-6">
+        <h2>Login</h2>
+          <input type="text" placeholder="UFL Email" id="email_field">
+          <br>
+          <br>
+          <input type="password" placeholder="Password" id="password_field">
+          <br><br>
+          <button class="btn btn-primary btn-lg" onClick="login()">Login</button>
+      </div>
+      <div class="col-md-6">
+        <h2>Sign Up</h2>
+          <input type="text" placeholder="UFL Email" id="new_email_field">
+          <br>
+          <br>
+          <input type="password" placeholder="Password" id="new_password_field">
+          <br><br>
+          <button class="btn btn-primary btn-lg" onClick="createAccount()">Sign Up</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</body>
+</html>
