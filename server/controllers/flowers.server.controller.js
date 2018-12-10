@@ -2,31 +2,31 @@
 /* Dependencies */
 const db = require('../db/initDB.js');
 
-/* Create a listing */
+/* Create a flower */
 exports.create = function(req, res) {
 
-  /* Instantiate a Listing */
+  /* Instantiate a Flower */
   console.log(req.body);
   console.log("entered create");
 
-  /* Then save the listing */
-  // listing.save(function(err) {
+  /* Then save the flower */
+  // flower.save(function(err) {
   //   if(err) {
   //     console.log(err);
   //     res.status(400).send(err);
   //   } else {
-  //     res.json(listing);
+  //     res.json(flower);
   //   }
   // });
 };
 
-/* Show the current listing */
+/* Show the current flower */
 exports.read = function(req, res) {
-  /* send back the listing as json from the request */
-  res.json(req.listing);
+  /* send back the flower as json from the request */
+  res.json(req.flower);
 };
 
-/* Update a listing */
+/* Update a flower */
 exports.update = function(req, res) {
   var body = req.body;
   console.log(body);
@@ -35,7 +35,7 @@ exports.update = function(req, res) {
 
   // /* Replace the article's properties with the new properties found in req.body */
   // /* Save the article */
-  //   Listing.findOneAndUpdate({name: listing.name},
+  //   Flower.findOneAndUpdate({name: flower.name},
   //    {name: req.body.name,
   //     code: req.body.code,
   //      coordinates: req.body.coordinates,
@@ -51,13 +51,13 @@ exports.update = function(req, res) {
   //   );
 };
 
-/* Delete a listing */
+/* Delete a flower */
 exports.delete = function(req, res) {
 
   var body = req.body;
   console.log("Entered delete");
   /* Remove the article */
-  //   Listing.findByIdAndRemove(listing.id, (err, deleted) => {
+  //   Flower.findByIdAndRemove(flower.id, (err, deleted) => {
   //   if (err) {
   //     res.status(404).send(err);      
   //   } 
@@ -67,7 +67,7 @@ exports.delete = function(req, res) {
   // });
 };
 
-/* Retreive all the directory listings, sorted alphabetically by listing code */
+/* Retreive all the directory flowers, sorted alphabetically by flower code */
 exports.list = function(req, res) {
 
   db.serialize(() => {
@@ -85,14 +85,14 @@ exports.list = function(req, res) {
 };
 
 /* 
-  Middleware: find a listing by its ID, then pass it to the next request handler. 
+  Middleware: find a flower by its ID, then pass it to the next request handler. 
  */
-exports.listingByName = function(req, res, next, name) {
-  // Listing.findById(id).exec(function(err, listing) {
+exports.flowerByName = function(req, res, next, name) {
+  // Flower.findById(id).exec(function(err, flower) {
   //   if(err) {
   //     res.status(400).send(err);
   //   } else {
-  //     req.listing = listing;
+  //     req.flower = flower;
   //     next();
   //   }
   // });
@@ -106,7 +106,7 @@ exports.listingByName = function(req, res, next, name) {
         res.status(400).send(err);
       }
       else {
-        req.listing = row;
+        req.flower = row;
         next();
       }
     });

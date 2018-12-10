@@ -6,7 +6,7 @@
     <meta charset='utf-8' />
     <title>SSWC Flowers</title>
 </head>
-<body ng-app="flowerApp" ng-controller="ListingsController">
+<body ng-app="flowerApp" ng-controller="FlowersController">
     <div class="container">
     <nav class="navbar navbar-light bg-light collapse navbar-collapse"id="navbarSupportedContent">
       <div class="container-fluid">
@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-4" id="listBar">
         <div class="btn-group" style="width:100%">
-      <div ng-repeat="flower in listings">
+      <div ng-repeat="flower in flowers">
           <button id={{flower.name}} style="width:90%" class="flowerButton" ng-click="loadFlowerInfo(flower)">{{flower.name}}</button>
         </div>
         </div>
@@ -54,9 +54,9 @@
 <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
 <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
-<!-- Listing Factory & Controller-->
-<script src="js/factories/listingFactory.js"></script>
-<script src="js/controllers/listingController.js"></script>
+<!-- Flower Factory & Controller-->
+<script src="js/factories/flowerFactory.js"></script>
+<script src="js/controllers/flowerController.js"></script>
 
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>

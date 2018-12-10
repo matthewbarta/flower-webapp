@@ -1,11 +1,11 @@
-angular.module('listings').controller('ListingsController', ['$scope', 'Listings',
-  function ($scope, Listings) {
+angular.module('flowers').controller('FlowersController', ['$scope', 'Flowers',
+  function ($scope, Flowers) {
  
-    /* Get all the listings, then bind it to the scope */
-    Listings.getAll().then(function (response) {
-      $scope.listings = response.data;
+    /* Get all the flowers, then bind it to the scope */
+    Flowers.getAll().then(function (response) {
+      $scope.flowers = response.data;
     }, function (error) {
-      console.log('Unable to retrieve listings:', error);
+      console.log('Unable to retrieve flowers:', error);
     });
 
    
