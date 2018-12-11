@@ -9,8 +9,6 @@ exports.create = function (req, res) {
     if (err) {
       return console.log(err.message);
     }
-    // get the last insert id
-    console.log(`A row has been inserted with rowid ${this.lastID}`);
   });
 };
 
@@ -22,7 +20,6 @@ exports.read = function (req, res) {
 
 /* Update a flower */
 exports.update = function (req, res) {
-   console.log(req.body);
   db.run(`UPDATE FLOWERS 
           SET GENUS = ?, 
           SPECIES = ?,
@@ -34,16 +31,22 @@ exports.update = function (req, res) {
       return console.log(err.message);
     }
   });
+  db.run(`UPDATE SIGHTINGS
+  SET NAME = ?
+  WHERE NAME = ?`,
+[req.body.name, req.body.oldName],
+function(err) {
+if (err) {
+return console.log(err.message);
+}
+});
 };
 
-/* Delete a flower */
-exports.delete = function (req, res) {
-
-  var body = req.body;
-  console.log("Entered delete");
+exports.delete = function(req, res) {
+ //does nothing
 };
 
-/* Retreive all the directory flowers, sorted alphabetically by flower code */
+/* Retreive all the flowers, sorted alphabetically by flower name */
 exports.list = function (req, res) {
 
 var readRecordsFromTable = function(callback) {
@@ -81,7 +84,7 @@ readRecordsFromTable(function(row) {
 };
 
 /* 
-  Middleware: find a flower by its ID, then pass it to the next request handler. 
+  Middleware: find a flower by its name, then pass it to the next request handler. 
  */
 exports.flowerByName = function (req, res, next, name) {
   db.serialize(() => {
