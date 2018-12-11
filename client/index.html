@@ -62,85 +62,85 @@
       </div>
     </div>
     <div class="col-md-4" id="listBar">
-      <div class="btn-group" style="width:100%" ng-repeat="flower in flowers" ng-init="loadFlowerInfo(flower)">
-        <button style="width:8%" class="flowerButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}">
+      <div class="btn-group" style="width:100%" ng-repeat="flower in flowers" ng-init="loadFlowerInfo(flowers[0])">
+        <button style="width:8%" class="flowerButton" type="button" data-toggle="modal" data-target="#editModal{{$index}}" ng-click="loadFlowerInfo(flower)">
           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
         <button id={{flower.name}} style="width:80%" class="flowerButton" ng-click="loadFlowerInfo(flower)">{{flower.name}}</button>
-        <button style="width:8%" class="flowerButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}"><span
+        <button style="width:8%" class="flowerButton" type="button" data-toggle="modal" data-target="#addModal{{$index}}" ng-click="loadFlowerInfo(flower)"><span
             class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-      </div>
-      <!-- Modal -->
-      <div class="modal fade" id="editModal{{flowers[$index].name}}" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Classroom in {{place.code}} | {{place.name}}</h4>
-            </div>
-            <div class="modal-body">
-              <form>
-                <br>
-                <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
-                <br>
-                <br>
-                <input type="text" placeholder="Description" ng-model="roomInfo.description">
-                <br>
-                <br>
-                <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
-                <br>
-                <br>
-                Room Size:
-                <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
-                <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
-                <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
-                <br>
-                <br>
-                <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
-                <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
-                <br><br>
-                <button ng-click="addClassroom($index, place)">Add Classroom</button>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- Modal -->
+        <div class="modal fade" id="editModal{{$index}}" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Information of {{flower.name}}</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <br>
+                  <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
+                  <br>
+                  <br>
+                  <input type="text" placeholder="Description" ng-model="roomInfo.description">
+                  <br>
+                  <br>
+                  <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
+                  <br>
+                  <br>
+                  Room Size:
+                  <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
+                  <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
+                  <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
+                  <br>
+                  <br>
+                  <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
+                  <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
+                  <br><br>
+                  <button ng-click="addClassroom($index, place)">Add Classroom</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Modal -->
-      <div class="modal fade" id="addModal{{flowers[$index].name}}" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add a sighting of {{flower.name}}</h4>
-            </div>
-            <div class="modal-body">
-              <form>
-                <br>
-                <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
-                <br>
-                <br>
-                <input type="text" placeholder="Description" ng-model="roomInfo.description">
-                <br>
-                <br>
-                <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
-                <br>
-                <br>
-                Room Size:
-                <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
-                <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
-                <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
-                <br>
-                <br>
-                <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
-                <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
-                <br><br>
-                <button ng-click="addClassroom($index, place)">Add Classroom</button>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- Modal -->
+        <div class="modal fade" id="addModal{{$index}}" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add a sighting of {{flower.name}}</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <br>
+                  <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
+                  <br>
+                  <br>
+                  <input type="text" placeholder="Description" ng-model="roomInfo.description">
+                  <br>
+                  <br>
+                  <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
+                  <br>
+                  <br>
+                  Room Size:
+                  <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
+                  <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
+                  <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
+                  <br>
+                  <br>
+                  <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
+                  <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
+                  <br><br>
+                  <button ng-click="addClassroom($index, place)">Add Classroom</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
