@@ -1,6 +1,7 @@
 
 /* Dependencies */
 const db = require('../db/initDB.js');
+const fs = require('fs');
 
 /* Create a flower */
 exports.create = function (req, res) {
@@ -39,6 +40,11 @@ function(err) {
 if (err) {
 return console.log(err.message);
 }
+});
+
+fs.rename('/Users/matthewbarta/Desktop/final/client/img/flowers/' + req.body.oldName + '.png', '/Users/matthewbarta/Desktop/final/client/img/flowers/' + req.body.name + '.png'  ,(err) => {
+  if (err) throw err;
+  console.log('Rename complete!');
 });
 };
 
@@ -101,5 +107,4 @@ exports.flowerByName = function (req, res, next, name) {
         }
       });
   });
-
 };
