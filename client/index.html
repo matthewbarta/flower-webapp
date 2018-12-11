@@ -25,7 +25,7 @@
         <div id="out_div">
           <ul class="nav navbar-nav navbar-right">
             <li><a id="user_id"></a></li>
-            <li><a href="signup.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+            <li><a id="logout" href="signup.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
           </ul>
         </div>
       </div>
@@ -74,30 +74,21 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit Information of {{flower.name}}</h4>
+                <h4 class="modal-title">Edit Information - {{flower.name}}</h4>
               </div>
               <div class="modal-body">
                 <form>
                   <br>
-                  <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
+                  <input type="text" placeholder="Common Name" ng-model="flowerInfo.name">
                   <br>
                   <br>
-                  <input type="text" placeholder="Description" ng-model="roomInfo.description">
+                  <input type="text" placeholder="Genus" ng-model="flowerInfo.genus">
                   <br>
                   <br>
-                  <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
+                  <input type="text" placeholder="Species" ng-model="roomInfo.species">
                   <br>
                   <br>
-                  Room Size:
-                  <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
-                  <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
-                  <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
-                  <br>
-                  <br>
-                  <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
-                  <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
-                  <br><br>
-                  <button ng-click="addClassroom($index, place)">Add Classroom</button>
+                  <button ng-click="editFlower(flower)">Edit Flower</button>
                 </form>
               </div>
               <div class="modal-footer">
@@ -117,25 +108,16 @@
               <div class="modal-body">
                 <form>
                   <br>
-                  <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
+                  <input type="text" placeholder="Your Name" ng-model="sightingInfo.person">
                   <br>
                   <br>
-                  <input type="text" placeholder="Description" ng-model="roomInfo.description">
+                  <input type="text" placeholder="Location" ng-model="sightingInfo.location">
                   <br>
                   <br>
-                  <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
+                  <input type="date" ng-model="sightingInfo.sighted">
                   <br>
                   <br>
-                  Room Size:
-                  <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
-                  <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
-                  <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
-                  <br>
-                  <br>
-                  <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
-                  <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
-                  <br><br>
-                  <button ng-click="addClassroom($index, place)">Add Classroom</button>
+                  <button ng-click="addSighting(flower)">Add Sighting</button>
                 </form>
               </div>
               <div class="modal-footer">
@@ -159,6 +141,21 @@
   <!-- Firebase API & AngularFire API-->
   <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA5Y_q99pkCGe1nTez7fpZxfg8e_iHzTnY",
+        authDomain: "swegroup2-6a1a3.firebaseapp.com",
+        databaseURL: "https://swegroup2-6a1a3.firebaseio.com",
+        projectId: "swegroup2-6a1a3",
+        storageBucket: "swegroup2-6a1a3.appspot.com",
+        messagingSenderId: "856196986882"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+<!-- Source of login scripts -->
+<script src="login.js"></script>
 
   <!-- Flower Factory & Controller-->
   <script src="js/factories/flowerFactory.js"></script>

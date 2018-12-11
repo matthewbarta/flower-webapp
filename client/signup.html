@@ -23,7 +23,7 @@
         <div id="out_div">
           <ul class="nav navbar-nav navbar-right">
             <li><a id="user_id"></a></li>
-            <li><a href="signup.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+            <li><a href="signup.html" onClick="logout()" id="logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
           </ul>
         </div>
       </div>
@@ -59,5 +59,20 @@
   </div>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA5Y_q99pkCGe1nTez7fpZxfg8e_iHzTnY",
+    authDomain: "swegroup2-6a1a3.firebaseapp.com",
+    databaseURL: "https://swegroup2-6a1a3.firebaseio.com",
+    projectId: "swegroup2-6a1a3",
+    storageBucket: "swegroup2-6a1a3.appspot.com",
+    messagingSenderId: "856196986882"
+  };
+  firebase.initializeApp(config);
+</script>
+<!-- Source of login scripts -->
+<script src="login.js"></script>
 </body>
 </html>

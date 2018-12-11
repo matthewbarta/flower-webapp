@@ -101,3 +101,11 @@ body {
 h5 {
 	font-size: 14px;
 }
+
+#user_id {
+	color:black;
+}
+
+#logout {
+	color: black;
+}
