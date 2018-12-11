@@ -4,20 +4,14 @@ const db = require('../db/initDB.js');
 
 /* Create a flower */
 exports.create = function (req, res) {
-
-  /* Instantiate a Sighting */
   console.log(req.body);
-  console.log("entered create");
-
-  /* Then save the flower */
-  // flower.save(function(err) {
-  //   if(err) {
-  //     console.log(err);
-  //     res.status(400).send(err);
-  //   } else {
-  //     res.json(flower);
-  //   }
-  // });
+  db.run(`INSERT INTO SIGHTINGS(name, person, location, sighted) VALUES(?,?,?,?)`, [req.body.name, req.body.person, req.body.location, req.body.sighted], function(err) {
+    if (err) {
+      return console.log(err.message);
+    }
+    // get the last insert id
+    console.log(`A row has been inserted with rowid ${this.lastID}`);
+  });
 };
 
 /* Show the current flower */
@@ -28,27 +22,14 @@ exports.read = function (req, res) {
 
 /* Update a flower */
 exports.update = function (req, res) {
-  var body = req.body;
-  console.log(body);
-  console.log("Entered update");
-
-
-  // /* Replace the article's properties with the new properties found in req.body */
-  // /* Save the article */
-  //   Sighting.findOneAndUpdate({name: flower.name},
-  //    {name: req.body.name,
-  //     code: req.body.code,
-  //      coordinates: req.body.coordinates,
-  //        address: req.body.address,
-  //         classRoomArray: req.body.classRoomArray}, {new: true}, (err, doc) => {
-  //           if (err) {
-  //              res.status(404).send(err);
-  //           }
-  //           else {
-  //              res.status(200).json(doc);
-  //           }
-  //         }
-  //   );
+  // console.log(req.body);
+  // db.run(`INSERT INTO SIGHTINGS(name, person, location, sighted) VALUES(?,?,?,?)`, [req.body.name, req.body.person, req.body.location, req.body.sighted], function(err) {
+  //   if (err) {
+  //     return console.log(err.message);
+  //   }
+  //   // get the last insert id
+  //   console.log(`A row has been inserted with rowid ${this.lastID}`);
+  // });
 };
 
 /* Delete a flower */
@@ -56,15 +37,6 @@ exports.delete = function (req, res) {
 
   var body = req.body;
   console.log("Entered delete");
-  /* Remove the article */
-  //   Sighting.findByIdAndRemove(flower.id, (err, deleted) => {
-  //   if (err) {
-  //     res.status(404).send(err);      
-  //   } 
-  //   else {
-  //     res.status(202).json(deleted);      
-  //   }
-  // });
 };
 
 /* Retreive all the directory flowers, sorted alphabetically by flower code */
@@ -108,15 +80,6 @@ readRecordsFromTable(function(row) {
   Middleware: find a flower by its ID, then pass it to the next request handler. 
  */
 exports.flowerByName = function (req, res, next, name) {
-  // Sighting.findById(id).exec(function(err, flower) {
-  //   if(err) {
-  //     res.status(400).send(err);
-  //   } else {
-  //     req.flower = flower;
-  //     next();
-  //   }
-  // });
-
   db.serialize(() => {
     db.get(`SELECT COMNAME as name, GENUS as genus, SPECIES as species
              FROM FLOWERS

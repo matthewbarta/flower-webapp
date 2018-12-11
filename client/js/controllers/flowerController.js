@@ -19,62 +19,34 @@ angular.module('flowers').controller('FlowersController', ['$scope', 'Flowers',
     };
 
         //Adding a classroom
-        $scope.addSighting = function (index, place) {
+        $scope.addSighting = function (flower) {
 
-          //Accounts for filtered data
-          index = $scope.listings.indexOf(place);
+          index = $scope.flowers.indexOf(flower);
     
-          //Ensure the user is logged in prior to them adding a classroom.
+          //Ensure the user is logged in prior to them adding a sighting
           var user = firebase.auth().currentUser;
           if(user != null) {
-            var roomInfo = $scope.roomInfo;
+            var sightingInfo= $scope.sightingInfo;
+            sightingInfo.name = flower.name;
     
-            console.log(roomInfo);
-            if(roomInfo.roomNumber == null || roomInfo.outlets == null || roomInfo.description == null || roomInfo.description == '') {
-              window.alert("Must fill in all the fields to add a classroom!");
+            console.log(sightingInfo);
+            console.log($scope.flowers[index].sightings);
+            if(sightingInfo.person == '' || sightingInfo.location == '' || sightingInfo.date == '') {
+              window.alert("Must fill in all the fields to add a sighting!");
               return;
             }
-    
-            var duplicateRoom = false;
+
+              Flowers.create(sightingInfo).then(function (response) { }, function (error) {
+                   console.log('Unable to update flower:', error);
+                 });
       
-            //Check if the room number already exists.
-            for (var i = 0; i < $scope.listings[index].classRoomArray.length; i++) {
-              if ($scope.listings[index].classRoomArray[i].roomNumber == roomInfo.roomNumber) {
-                duplicateRoom = true;
-                break;
-              }
-            }
-      
-            //If it exists, reset the request and return.
-            if (duplicateRoom) {
-              window.alert("Cannot add duplicate room number!");
-              $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
-              $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
-              $scope.roomInfo.blackboard = false;
-              $scope.roomInfo.whiteboard = false;
-              $scope.roomInfo.isOccupied = false;
-              return;
-            }
-            //Otherwise add the classroom the building's classroom array.
-            else {
-              $scope.listings[index].classRoomArray.push(roomInfo);
-      
-              Listings.update($scope.listings[index]._id, $scope.listings[index]).then(function (response) { }, function (error) {
-                console.log('Unable to update listing:', error);
-              });
-      
-              $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
-              $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
-              $scope.roomInfo.blackboard = false;
-              $scope.roomInfo.whiteboard = false;
-              $scope.roomInfo.isOccupied = false;
-    
-              window.alert("A new room has been added to : " + place.code);
+              $scope.sightingInfo = {}; //Clear the scope afterwards.
+
+              window.alert("A new sighting has been added to : " + flower.name);
               location.reload();
               }
-          }
           else {
-            window.alert("You must be logged in to create a new classroom!");
+            window.alert("You must be logged in to create a new sighting!");
             location.reload();
             return;
           }
