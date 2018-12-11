@@ -5,7 +5,7 @@ const db = require('../db/initDB.js');
 /* Create a flower */
 exports.create = function (req, res) {
 
-  /* Instantiate a Flower */
+  /* Instantiate a Sighting */
   console.log(req.body);
   console.log("entered create");
 
@@ -35,7 +35,7 @@ exports.update = function (req, res) {
 
   // /* Replace the article's properties with the new properties found in req.body */
   // /* Save the article */
-  //   Flower.findOneAndUpdate({name: flower.name},
+  //   Sighting.findOneAndUpdate({name: flower.name},
   //    {name: req.body.name,
   //     code: req.body.code,
   //      coordinates: req.body.coordinates,
@@ -57,7 +57,7 @@ exports.delete = function (req, res) {
   var body = req.body;
   console.log("Entered delete");
   /* Remove the article */
-  //   Flower.findByIdAndRemove(flower.id, (err, deleted) => {
+  //   Sighting.findByIdAndRemove(flower.id, (err, deleted) => {
   //   if (err) {
   //     res.status(404).send(err);      
   //   } 
@@ -70,6 +70,7 @@ exports.delete = function (req, res) {
 /* Retreive all the directory flowers, sorted alphabetically by flower code */
 exports.list = function (req, res) {
 
+var readRecordsFromTable = function(callback) {
   db.serialize(() => {
     db.all(`SELECT COMNAME as name, GENUS as genus, SPECIES as species
              FROM FLOWERS
@@ -79,10 +80,28 @@ exports.list = function (req, res) {
           res.status(404).send(err);
         }
         else {
-          res.status(200).json(rows);
+          rows.forEach(function(row) {
+            var name = row.name;
+            db.all(`SELECT PERSON, SIGHTED, LOCATION
+            FROM FLOWERS, SIGHTINGS
+            WHERE COMNAME = NAME And NAME = ?
+            Order By SIGHTED DESC LIMIT 10`, [name], (err, sightings) => {
+              row.sightings = sightings;
+              callback(row);
+            });
+          });
         }
       });
   });
+};
+
+var endRows = new Array();
+readRecordsFromTable(function(row) {
+  endRows.push(row);
+  if(endRows.length == 50) {
+    res.status(200).json(endRows);
+  }
+});
 
 };
 
@@ -90,7 +109,7 @@ exports.list = function (req, res) {
   Middleware: find a flower by its ID, then pass it to the next request handler. 
  */
 exports.flowerByName = function (req, res, next, name) {
-  // Flower.findById(id).exec(function(err, flower) {
+  // Sighting.findById(id).exec(function(err, flower) {
   //   if(err) {
   //     res.status(400).send(err);
   //   } else {

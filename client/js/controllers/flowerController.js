@@ -1,6 +1,6 @@
 angular.module('flowers').controller('FlowersController', ['$scope', 'Flowers',
   function ($scope, Flowers) {
- 
+    $scope.sightings = {};
     /* Get all the flowers, then bind it to the scope */
     Flowers.getAll().then(function (response) {
       $scope.flowers = response.data;
@@ -25,6 +25,7 @@ angular.module('flowers').controller('FlowersController', ['$scope', 'Flowers',
 
     $scope.loadFlowerInfo = function(flower) {
       document.getElementById("flower-image").src = "img/flowers/" + flower.name + ".png";
+      
     };
   }
 ]);
