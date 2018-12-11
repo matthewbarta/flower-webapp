@@ -94,7 +94,7 @@ angular.module('flowers').controller('FlowersController', ['$scope', 'Flowers',
         }; //Clear the scope afterwards.
 
         window.alert(flower.name + " has been edited!");
-        //location.reload();
+        location.reload();
       }
       else {
         window.alert("You must be logged in to create a new sighting!");
