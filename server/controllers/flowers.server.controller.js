@@ -22,14 +22,18 @@ exports.read = function (req, res) {
 
 /* Update a flower */
 exports.update = function (req, res) {
-  // console.log(req.body);
-  // db.run(`INSERT INTO SIGHTINGS(name, person, location, sighted) VALUES(?,?,?,?)`, [req.body.name, req.body.person, req.body.location, req.body.sighted], function(err) {
-  //   if (err) {
-  //     return console.log(err.message);
-  //   }
-  //   // get the last insert id
-  //   console.log(`A row has been inserted with rowid ${this.lastID}`);
-  // });
+   console.log(req.body);
+  db.run(`UPDATE FLOWERS 
+          SET GENUS = ?, 
+          SPECIES = ?,
+          COMNAME = ?
+          WHERE COMNAME = ?`,
+   [req.body.genus, req.body.species, req.body.name, req.body.oldName],
+    function(err) {
+    if (err) {
+      return console.log(err.message);
+    }
+  });
 };
 
 /* Delete a flower */

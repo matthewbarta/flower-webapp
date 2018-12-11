@@ -7,12 +7,8 @@ angular.module('flowers', []).factory('Flowers', function($http) {
       return $http.post('http://localhost:8080/api/flowers', flowerSighting);
     },
     
-  update : function(id, flower) {
-      return $http.put(`http://localhost:8080/api/flowers/${id}`, flower);
-    },
-
-    editFlower : function(id, flower) {
-      return $http.put(`http://localhost:8080/api/flowers/${id}`, flower);
+  update : function(id, flowerInfo) {
+      return $http.put(`http://localhost:8080/api/flowers/${id}`, flowerInfo);
     },
     
   delete: function(id) {
