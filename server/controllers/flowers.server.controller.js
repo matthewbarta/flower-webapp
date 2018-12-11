@@ -82,7 +82,7 @@ var readRecordsFromTable = function(callback) {
         else {
           rows.forEach(function(row) {
             var name = row.name;
-            db.all(`SELECT PERSON, SIGHTED, LOCATION
+            db.all(`SELECT PERSON as person, SIGHTED as sighted, LOCATION as location
             FROM FLOWERS, SIGHTINGS
             WHERE COMNAME = NAME And NAME = ?
             Order By SIGHTED DESC LIMIT 10`, [name], (err, sightings) => {
@@ -94,7 +94,6 @@ var readRecordsFromTable = function(callback) {
       });
   });
 };
-
 var endRows = new Array();
 readRecordsFromTable(function(row) {
   endRows.push(row);

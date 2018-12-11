@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <meta charset='utf-8' />
-    <title>SSWC Flowers</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <meta charset='utf-8' />
+  <title>SSWC Flowers</title>
 </head>
+
 <body ng-app="flowerApp" ng-controller="FlowersController">
-    <div class="container">
-    <nav class="navbar navbar-light bg-light collapse navbar-collapse"id="navbarSupportedContent">
+  <div class="container">
+    <nav class="navbar navbar-light bg-light collapse navbar-collapse" id="navbarSupportedContent">
       <div class="container-fluid">
         <a class="navbar-brand" id="logoTitlePackage" href="index.html">
           <img id="navLogo" src="img/flowerlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -29,36 +31,142 @@
       </div>
     </nav>
     <div class="col-md-4">
-      <img id="flower-image" src=""/>
+      <img id="flower-image" src="" />
       <div id="flower-info">
+        <h3 class="center">Name: {{detailedInfo.name}}</h3>
+        <h3 class="center" style="margin-bottom: 20px;">Scientific Name: {{detailedInfo.genus}}
+          {{detailedInfo.species}}</h3>
+        <div>
+          <h5 class="center" ng-show="detailedInfo.sightings[0]">1. {{detailedInfo.sightings[0].person}} |
+            {{detailedInfo.sightings[0].location}} | {{detailedInfo.sightings[0].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[1]">2. {{detailedInfo.sightings[1].person}} |
+            {{detailedInfo.sightings[1].location}} | {{detailedInfo.sightings[1].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[2]">3. {{detailedInfo.sightings[2].person}} |
+            {{detailedInfo.sightings[2].location}} | {{detailedInfo.sightings[2].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[3]">4. {{detailedInfo.sightings[3].person}} |
+            {{detailedInfo.sightings[3].location}} | {{detailedInfo.sightings[3].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[4]">5. {{detailedInfo.sightings[4].person}} |
+            {{detailedInfo.sightings[4].location}} | {{detailedInfo.sightings[4].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[5]">6. {{detailedInfo.sightings[5].person}} |
+            {{detailedInfo.sightings[5].location}} | {{detailedInfo.sightings[5].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[6]">7. {{detailedInfo.sightings[6].person}} |
+            {{detailedInfo.sightings[6].location}} | {{detailedInfo.sightings[6].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[7]">8. {{detailedInfo.sightings[7].person}} |
+            {{detailedInfo.sightings[7].location}} | {{detailedInfo.sightings[7].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[8]">9. {{detailedInfo.sightings[8].person}} |
+            {{detailedInfo.sightings[8].location}} | {{detailedInfo.sightings[8].sighted}}</h5>
+          <h5 class="center" ng-show="detailedInfo.sightings[9]">10. {{detailedInfo.sightings[9].person}} |
+            {{detailedInfo.sightings[9].location}} | {{detailedInfo.sightings[9].sighted}}</h5>
         </div>
+
+      </div>
     </div>
     <div class="col-md-4" id="listBar">
-        <div class="btn-group" style="width:100%">
-      <div ng-repeat="flower in flowers">
-          <button id={{flower.name}} style="width:90%" class="flowerButton" ng-click="loadFlowerInfo(flower)">{{flower.name}}</button>
+      <div class="btn-group" style="width:100%" ng-repeat="flower in flowers" ng-init="loadFlowerInfo(flower)">
+        <button style="width:8%" class="flowerButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}">
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+        <button id={{flower.name}} style="width:80%" class="flowerButton" ng-click="loadFlowerInfo(flower)">{{flower.name}}</button>
+        <button style="width:8%" class="flowerButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}"><span
+            class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="editModal{{flowers[$index].name}}" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add Classroom in {{place.code}} | {{place.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <br>
+                <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
+                <br>
+                <br>
+                <input type="text" placeholder="Description" ng-model="roomInfo.description">
+                <br>
+                <br>
+                <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
+                <br>
+                <br>
+                Room Size:
+                <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
+                <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
+                <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
+                <br>
+                <br>
+                <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
+                <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
+                <br><br>
+                <button ng-click="addClassroom($index, place)">Add Classroom</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="addModal{{flowers[$index].name}}" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add a sighting of {{flower.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <br>
+                <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
+                <br>
+                <br>
+                <input type="text" placeholder="Description" ng-model="roomInfo.description">
+                <br>
+                <br>
+                <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
+                <br>
+                <br>
+                Room Size:
+                <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
+                <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
+                <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
+                <br>
+                <br>
+                <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
+                <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
+                <br><br>
+                <button ng-click="addClassroom($index, place)">Add Classroom</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
-    </div>     
+      </div>
     </div>
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  </div>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<!-- AngularJS -->
-<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+  <!-- AngularJS -->
+  <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
 
-<!-- Access to Angular App -->>
-<script src="js/app.js"></script>
+  <!-- Access to Angular App -->>
+  <script src="js/app.js"></script>
 
-<!-- Firebase API & AngularFire API-->
-<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+  <!-- Firebase API & AngularFire API-->
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
-<!-- Flower Factory & Controller-->
-<script src="js/factories/flowerFactory.js"></script>
-<script src="js/controllers/flowerController.js"></script>
+  <!-- Flower Factory & Controller-->
+  <script src="js/factories/flowerFactory.js"></script>
+  <script src="js/controllers/flowerController.js"></script>
 
-<!-- Bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
